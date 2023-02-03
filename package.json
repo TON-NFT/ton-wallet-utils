@@ -1,0 +1,33 @@
+{
+  "name": "ton-wallet-utils",
+  "version": "2.42.0",
+  "description": "@tg09F9 package for TON, with some helpfull utils for wallet based on @TrueCarry liteserver",
+  "type": "module",
+  "scripts": {
+    "dev": "node test/wallet.js",
+    "postinstall": "node private/patch.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TON-NFT/ton-wallet-utils.git"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "@tg09F9",
+  "license": "ISC",
+  "dependencies": {
+    "@truecarry/ton-lite-client": "^1.5.10",
+    "axios": "^0.27.2",
+    "fs-extra": "^10.1.0",
+    "graphql-request": "^5.0.0",
+    "node-fetch": "^3.3.0",
+    "ton": "^12.1.1",
+    "ton-crypto": "^3.2.0",
+    "ton-lite-client": "^1.6.0",
+    "ton3-contracts": "^0.0.14",
+    "ton3-core": "^0.0.15",
+    "tonweb": "^0.0.54",
+    "tonweb-mnemonic": "^1.0.1",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
