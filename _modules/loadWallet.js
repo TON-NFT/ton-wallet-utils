@@ -23,8 +23,8 @@ export async function loadWallet({ version = 'v4R2', mnemonic = [], seed = '' })
   const { publicKey, secretKey } = keyPair
   const client = new TonClient({ endpoint: 'https://example.com' })
   const wallet = client.openWalletFromSecretKey({ secretKey: Buffer.from(keyPair.secretKey), workchain: 0, type: walletType })
-  const address = wallet.address
-  const nonBouncableAddress = address.toFriendly({bounceable: false})
+  const address = wallet.address.toFriendly('base64', { bounceable: true, urlSafe: true, workchain: 0 })
+  const nonBouncableAddress = wallet.address.toFriendly('base64', { bounceable: false, urlSafe: true, workchain: 0 })
   return { address, nonBouncableAddress, mnemonic, publicKey, secretKey }
 }
 
