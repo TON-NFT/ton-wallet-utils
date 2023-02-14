@@ -1,4 +1,4 @@
-import { createHighloadWallet } from '../private/createHighloadWallet.js'
+import { createHighloadWallet } from './createHighloadWallet.js'
 import { VERSION_TYPES } from '../private/config.js'
 import { tonMnemonic, tonweb } from '../private/tonweb.js'
 
@@ -16,5 +16,5 @@ async function createRegularWallet() {
   const addr = await wallet.getAddress()
   const address = addr.toString(true, true, true, false)
   const addressNonBouncable = addr.toString(true, true, false, false)
-  return { address, addressNonBouncable, mnemonic, publicKey, secretKey }
+  return { address, addressNonBouncable, mnemonic, publicKey, secretKey, wallet }
 }
