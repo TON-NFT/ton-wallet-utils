@@ -1,6 +1,5 @@
 import { keyPairFromSeed } from 'ton-crypto'
 import { Wallets } from 'ton3-contracts'
-import { loadHighloadWallet } from './loadHighloadWallet.js'
 
 export async function loadHighloadWallet({ seed }) {
   const seedBuffer = Buffer.from(seed, 'hex')
