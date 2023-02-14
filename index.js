@@ -20,6 +20,7 @@ import { transferNft } from './_modules/transferNft.js'
 import { getNftsFromScaleton } from './_modules/getNftsFromScaleton.js'
 import { getTonPrice } from './_modules/getTonPrice.js'
 import { transferJetton } from './_modules/transferJetton.js'
+import { transferJettonFromHighload } from './_modules/transferJettonFromHighload.js'
 import { getJettonBalance } from './_modules/getJettonBalance.js'
 import { refreshGetgemsMetadata } from './_modules/refreshGetgemsMetadata.js'
 import { whoIsAddress } from './_modules/whoIsAddress.js'
@@ -48,6 +49,7 @@ export {
   transferNft,
   getTonPrice,
   transferJetton,
+  transferJettonFromHighload,
   getJettonBalance,
   refreshGetgemsMetadata,
   whoIsAddress,

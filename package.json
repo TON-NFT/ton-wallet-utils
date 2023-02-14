@@ -4,7 +4,7 @@
   "description": "@tg09F9 package for TON, with some helpfull utils for wallet based on @TrueCarry liteserver",
   "type": "module",
   "scripts": {
-    "dev": "node test/wallet.js",
+    "dev": "node test/example.js",
     "postinstall": "node private/patch.js"
   },
   "repository": {

@@ -19,6 +19,7 @@ Based on [@truecarry/ton-lite-client](https://www.npmjs.com/package/@truecarry/t
 - Get NFT metadata by address
 - Transfer NFT
 - Transfer Jettons
+- Transfer Jettons from Highload Wallet
 - Get NFT collection floor
 - Get NFT collection metadata by address
 - Get known NFT collections addresses
