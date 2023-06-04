@@ -5,6 +5,7 @@ import { createWallet } from './_modules/createWallet.js'
 import { createHighloadWallet } from './_modules/createHighloadWallet.js'
 import { getBalance } from './_modules/getBalance.js'
 import { getDomain } from './_modules/getDomain.js'
+import { getDomainDate } from './_modules/getDomainDate.js'
 import { getFloor } from './_modules/getFloor.js'
 import { getJettons } from './_modules/getJettons.js'
 import { getNfts } from './_modules/getNfts.js'
@@ -34,6 +35,7 @@ export {
   flipAddressType,
   getBalance,
   getDomain,
+  getDomainDate,
   getFloor,
   getJettons,
   getNfts,

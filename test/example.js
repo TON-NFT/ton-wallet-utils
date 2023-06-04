@@ -11,6 +11,7 @@ import {
   getTransactions,
   startTonLiteServer,
   transferNft,
+  getDomainDate,
   getNftsFromScaleton,
   getTonPrice,
   refreshGetgemsMetadata,
@@ -38,6 +39,7 @@ const transactions = await getTransactions({ address })
 const tonPrice = await getTonPrice()
 const refresh = await refreshGetgemsMetadata({ address: 'EQDnMTsgio_GtNKZjD1Ow6N6sAfJY_DBk-ClC-WSsvvo7YCP' })
 const whois = await whoIsAddress('EQCtiv7PrMJImWiF2L5oJCgPnzp-VML2CAt5cbn1VsKAxLiE')
+const domainDate = await getDomainDate({ address: 'EQD6doIj7gRnw160Bc-fSKEs641wVFDHTROkOt__j4ykiU2o' })
 
 // const data = {
 //   version: 'v4R2',
@@ -52,5 +54,5 @@ const whois = await whoIsAddress('EQCtiv7PrMJImWiF2L5oJCgPnzp-VML2CAt5cbn1VsKAxL
 // const result = await transferNft(data)
 // console.log(result)
 
-console.log({ refresh, whois, floor, jettons, nfts, nfts2, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice })
+console.log({ refresh, whois, floor, jettons, nfts, nfts2, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice, domainDate })
 process.exit(0)
