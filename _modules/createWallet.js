@@ -4,15 +4,16 @@ import { tonMnemonic, tonweb } from '../private/tonweb.js'
 
 export async function createWallet({ version = 'v4R2' }) {
   if (version === VERSION_TYPES.highload) return await createHighloadWallet()
-  if (version === VERSION_TYPES.v4R2) return await createRegularWallet()
+  if (version === VERSION_TYPES.v4R2) return await createRegularWallet({ version })
   return { error: 'Unknown version' }
 }
 
-async function createRegularWallet() {
+async function createRegularWallet({ version }) {
   const mnemonic = await tonMnemonic.generateMnemonic()
   const keyPair = await tonMnemonic.mnemonicToKeyPair(mnemonic)
   const { publicKey, secretKey } = keyPair
-  const wallet = tonweb.wallet.create({ publicKey })
+  const WalletClass = tonweb.wallet.all[version]
+  const wallet = new WalletClass(tonweb.provider, { publicKey, wc: 0 })
   const addr = await wallet.getAddress()
   const address = addr.toString(true, true, true, false)
   const addressNonBouncable = addr.toString(true, true, false, false)
