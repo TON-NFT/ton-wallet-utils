@@ -1,13 +1,17 @@
-import { Address } from 'ton'
-import { startTonLiteServer } from './startTonLiteServer.js'
+import fetch from 'node-fetch'
 
-export async function getTransactions({ address }) {
-  const client = await startTonLiteServer()
-  const mc = await client.getMasterchainInfoExt()
-  const block = mc.last
+export async function getTransactions({ address, limit = 10, TON_API_TOKEN = '' }) {
+  const headers = {}
 
-  const state = await client.getAccountState(Address.parse(address), block)
-  const transactions = await client.getAccountTransactions(Address.parse(address), state.lastTx?.lt, state.lastTx?.hash, 10)
+  if (TON_API_TOKEN) headers['Authorization'] = `Bearer ${TON_API_TOKEN}`
 
-  return transactions || []
+  try {
+    const result = await fetch(`https://tonapi.io/v2/blockchain/accounts/${address}/transactions?limit=${limit}`, { headers })
+    const data = await result.json()
+    if (!data?.transactions) throw new Error('Invalid response')
+    const { transactions } = data
+    return { transactions }
+  } catch (e) {
+    return { error: e }
+  }
 }

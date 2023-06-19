@@ -9,7 +9,9 @@ import { getDomainDate } from './_modules/getDomainDate.js'
 import { getFloor } from './_modules/getFloor.js'
 import { getJettons } from './_modules/getJettons.js'
 import { getNfts } from './_modules/getNfts.js'
+import { getTransaction } from './_modules/getTransaction.js'
 import { getTransactions } from './_modules/getTransactions.js'
+import { getTransactionsLiteServer } from './_modules/getTransactionsLiteServer.js'
 import { highloadTransfers } from './_modules/highloadTransfers.js'
 import { loadWallet } from './_modules/loadWallet.js'
 import { loadHighloadWallet } from './_modules/loadHighloadWallet.js'
@@ -40,7 +42,9 @@ export {
   getJettons,
   getNfts,
   getNftsFromScaleton,
+  getTransaction,
   getTransactions,
+  getTransactionsLiteServer,
   highloadTransfers,
   loadWallet,
   loadHighloadWallet,
