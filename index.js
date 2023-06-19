@@ -12,6 +12,7 @@ import { getNfts } from './_modules/getNfts.js'
 import { getTransaction } from './_modules/getTransaction.js'
 import { getTransactions } from './_modules/getTransactions.js'
 import { getTransactionsLiteServer } from './_modules/getTransactionsLiteServer.js'
+import { parseTransaction } from './_modules/parseTransaction.js'
 import { highloadTransfers } from './_modules/highloadTransfers.js'
 import { loadWallet } from './_modules/loadWallet.js'
 import { loadHighloadWallet } from './_modules/loadHighloadWallet.js'
@@ -45,6 +46,7 @@ export {
   getTransaction,
   getTransactions,
   getTransactionsLiteServer,
+  parseTransaction,
   highloadTransfers,
   loadWallet,
   loadHighloadWallet,
