@@ -29,6 +29,7 @@ import { getJettonBalance } from './_modules/getJettonBalance.js'
 import { refreshGetgemsMetadata } from './_modules/refreshGetgemsMetadata.js'
 import { whoIsAddress } from './_modules/whoIsAddress.js'
 import { getCollection } from './_modules/getCollection.js'
+import { getNonBouncable } from './_modules/getNonBouncable.js'
 
 export {
   config,
@@ -62,4 +63,5 @@ export {
   refreshGetgemsMetadata,
   whoIsAddress,
   getCollection,
+  getNonBouncable,
 }
