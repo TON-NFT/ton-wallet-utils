@@ -1,7 +1,7 @@
 import { TonClient, internal, WalletContractV4, WalletContractV3R1, WalletContractV3R2 } from 'ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
 
-export async function transferTonWithOrbs({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
+export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
   const client = await startTonLiteServer()
   const keyPair = await mnemonicToPrivateKey(mnemonic)
   const { publicKey, secretKey } = keyPair
