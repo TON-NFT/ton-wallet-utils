@@ -1,5 +1,5 @@
 import { startTonLiteServer } from './startTonLiteServer.js'
-import { Address, Cell, parseStack } from 'ton'
+import { Address, Cell, parseTuple } from 'ton'
 
 export async function getDomain({ address }) {
   const client = await startTonLiteServer()
@@ -9,10 +9,8 @@ export async function getDomain({ address }) {
   const { result } = await client.runMethod(Address.parse(address), 'get_domain', buffer, currentBlock)
   const dataBuffer = Buffer.from(result, 'base64')
   const cell = Cell.fromBoc(dataBuffer)[0]
-  const stack = parseStack(cell)
-  const arg1 = stack[0]
-  const slice = arg1.cell.beginParse()
-  const bitString = slice['bits'].buffer
-  const domain = new TextDecoder().decode(bitString).replace(/\x00/g, '')
+  const [domainItem] = parseTuple(cell)
+  const slice = domainItem.cell.beginParse()
+  const domain = slice.loadBuffer(slice.remainingBits / 8).toString('ascii')
   return `${domain}.ton`
 }

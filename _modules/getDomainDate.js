@@ -1,17 +1,16 @@
 import { startTonLiteServer } from './startTonLiteServer.js'
-import { Address, Cell, parseStack } from 'ton'
+import { Address, Cell, parseTuple } from 'ton'
 
 export async function getDomainDate({ address }) {
   const client = await startTonLiteServer()
   const mc = await client.getMasterchainInfoExt()
   const currentBlock = mc.last
   const buffer = Buffer.alloc(0)
-  const { result } = await client.runMethod(Address.parse(address), 'get_last_fill_up_time', buffer, currentBlock)
-  const dataBuffer = Buffer.from(result, 'base64')
-  const cell = Cell.fromBoc(dataBuffer)[0]
-  const stack = parseStack(cell)
-  const arg1 = stack[0]
-  const date = new Date(arg1.value * 1000)
+  const result = await client.runMethod(Address.parse(address), 'get_last_fill_up_time', buffer, currentBlock)
+  const cell = Cell.fromBoc(Buffer.from(result.result, 'base64'))[0]
+  const tuple = parseTuple(cell)
+  const arg1 = Number(tuple[0].value)
+  const date = new Date(arg1 * 1000)
   const day = date.getDate()
   const month = date.getMonth() + 1
   const year = date.getFullYear()

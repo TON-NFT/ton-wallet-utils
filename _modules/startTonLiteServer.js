@@ -1,6 +1,6 @@
-import { LiteSingleEngine } from '@truecarry/ton-lite-client/dist/engines/single.js'
-import { LiteRoundRobinEngine } from '@truecarry/ton-lite-client/dist/engines/roundRobin.js'
-import { LiteClient } from '@truecarry/ton-lite-client/dist/client.js'
+import { LiteSingleEngine } from 'ton-lite-client/dist/engines/single.js'
+import { LiteRoundRobinEngine } from 'ton-lite-client/dist/engines/roundRobin.js'
+import { LiteClient } from 'ton-lite-client/dist/client.js'
 import { NODES_INFO } from '../private/config.js'
 import axios from 'axios'
 
