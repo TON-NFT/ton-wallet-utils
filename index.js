@@ -18,6 +18,7 @@ import { loadWallet } from './_modules/loadWallet.js'
 import { loadHighloadWallet } from './_modules/loadHighloadWallet.js'
 import { startTonLiteServer } from './_modules/startTonLiteServer.js'
 import { transferTon } from './_modules/transferTon.js'
+import { transferTonWithOrbs } from './_modules/transferTonWithOrbs.js'
 import { shortAddress, flipAddressType } from './_modules/utils.js'
 import { getNftContent } from './_modules/getNftContent.js'
 import { transferNft } from './_modules/transferNft.js'
@@ -53,6 +54,7 @@ export {
   loadHighloadWallet,
   startTonLiteServer,
   transferTon,
+  transferTonWithOrbs,
   shortAddress,
   getNftContent,
   transferNft,
