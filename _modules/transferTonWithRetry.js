@@ -29,7 +29,7 @@ export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address
   const seqno = await contract.getSeqno() || 0
   const signedTransaction = await contract.createTransfer({ seqno, secretKey, messages })
 
-  /* To ensure that the transaction is sent, we send it 5 times */
+  /* To ensure that the transaction is sent, we send it 5 times using Lite-Server */
   for (let i = 0; i < 5; i++) {
     try {
       await client.sendMessage(signedTransaction.toBoc())

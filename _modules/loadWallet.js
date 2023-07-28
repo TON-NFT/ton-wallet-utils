@@ -1,4 +1,4 @@
-import { TonClient, WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from 'ton'
+import { Address, TonClient, WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from 'ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
 import TonWeb from 'tonweb'
 import { loadHighloadWallet } from './loadHighloadWallet.js'
@@ -24,6 +24,7 @@ export async function loadWallet({ version = VERSION_TYPES.v4R2, mnemonic = [], 
   const address = wallet.address.toString()
   const nonBouncableAddress = new TonWeb.utils.Address(address).toString(true, true, false, false)
   const rawAddress = wallet.address.toRawString()
-  const provider = clientTon.provider(wallet.address)
+  const addr = Address.fromRawString(rawAddress)
+  const provider = clientTon.provider(addr)
   return { address, rawAddress, nonBouncableAddress, provider, mnemonic, publicKey, secretKey, wallet }
 }
