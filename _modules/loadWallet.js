@@ -24,7 +24,7 @@ export async function loadWallet({ version = VERSION_TYPES.v4R2, mnemonic = [], 
   const address = wallet.address.toString()
   const nonBouncableAddress = new TonWeb.utils.Address(address).toString(true, true, false, false)
   const rawAddress = wallet.address.toRawString()
-  const addr = Address.fromRawString(rawAddress)
+  const addr = Address.parseRaw(rawAddress)
   const provider = clientTon.provider(addr)
   return { address, rawAddress, nonBouncableAddress, provider, mnemonic, publicKey, secretKey, wallet }
 }
