@@ -7,7 +7,7 @@ Please, check `test/example.js` for some examples.
 And `test/wallet.js` for Highload Wallet examples.
 
 ## Introduction
-Based on [@truecarry/ton-lite-client](https://www.npmjs.com/package/@truecarry/ton-lite-client)
+Using under the hood — [ton-lite-client](https://www.npmjs.com/package/ton-lite-client)
 
 ## Features
 - Start TON Lite Server
