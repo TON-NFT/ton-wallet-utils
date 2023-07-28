@@ -8,7 +8,7 @@ export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address
   const { publicKey, secretKey } = keyPair
 
   /* We are not actually using this endpoint */
-  const endpoint = 'https://example.com'
+  const endpoint = 'https://toncenter.com/api/v2/jsonRPC'
   const clientTon = new TonClient({ endpoint })
 
   let walletInterface = {}
