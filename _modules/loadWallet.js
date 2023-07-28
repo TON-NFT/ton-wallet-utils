@@ -1,28 +1,28 @@
-import { TONCENTER_API_KEY, VERSION_TYPES } from '../private/config.js'
-import { tonMnemonic } from '../private/tonweb.js'
-import { TonClient } from 'ton'
+import { WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from 'ton'
+import { mnemonicToPrivateKey } from 'ton-crypto'
+import TonWeb from 'tonweb'
 import { loadHighloadWallet } from './loadHighloadWallet.js'
+import { VERSION_TYPES } from '../private/config.js'
 
 export async function loadWallet({ version = 'v4R2', mnemonic = [], seed = '' }) {
-  let walletType
-  switch (version) {
-    case VERSION_TYPES.highload:
-      return await loadHighloadWallet({ seed })
-    case VERSION_TYPES.v3R2:
-      walletType = 'org.ton.wallets.v3.r2'
-      break
-    case VERSION_TYPES.v4R2:
-      walletType = 'org.ton.wallets.v4'
-      break
-    default:
-      return { error: 'Unknown version. Please use v3R2, v4R2 or highload' }
-  }
+  if (version === VERSION_TYPES.highload) return await loadHighloadWallet({ seed })
 
-  const keyPair = await tonMnemonic.mnemonicToKeyPair(mnemonic)
+  const keyPair = await mnemonicToPrivateKey(mnemonic)
   const { publicKey, secretKey } = keyPair
-  const client = new TonClient({ endpoint: 'https://toncenter.com/api/v2/jsonRPC', apiKey: TONCENTER_API_KEY })
-  const wallet = client.openWalletFromSecretKey({ secretKey: Buffer.from(keyPair.secretKey), workchain: 0, type: walletType })
-  const address = wallet.address.toFriendly('base64', { bounceable: true, urlSafe: true, workchain: 0 })
-  const nonBouncableAddress = wallet.address.toFriendly('base64', { bounceable: false, urlSafe: true, workchain: 0 })
-  return { address, nonBouncableAddress, mnemonic, publicKey, secretKey, wallet }
+
+  let walletInterface = {}
+
+  if (version === 'v3R1') walletInterface = WalletContractV3R1
+  if (version === 'v3R2') walletInterface = WalletContractV3R2
+  if (version === 'v4R1') walletInterface = WalletContractV4
+  if (version === 'v4R2') walletInterface = WalletContractV4
+
+  if (!walletInterface) throw new Error('Invalid wallet version')
+
+  const workchain = 0
+  const wallet = walletInterface.create({ workchain, publicKey })
+  const address = wallet.address.toString()
+  const nonBouncableAddress = new TonWeb.utils.Address(address).toString(true, true, false, false)
+  const rawAddress = wallet.address.toRawString()
+  return { address, rawAddress, nonBouncableAddress, mnemonic, publicKey, secretKey, wallet }
 }
