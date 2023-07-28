@@ -3,12 +3,13 @@ import { mnemonicToPrivateKey } from 'ton-crypto'
 import { startTonLiteServer } from './startTonLiteServer.js'
 import { TONCENTER_API_KEY, TONCENTER_RPC, VERSION_TYPES } from '../private/config.js'
 
+/* TODO: Sometimes doesn't work because of strange error "cannot apply external message to current state" */
 export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
   const client = await startTonLiteServer()
   const keyPair = await mnemonicToPrivateKey(mnemonic)
   const { publicKey, secretKey } = keyPair
 
-  /* We are not actually using this endpoint */
+  /* We are not actually using this endpoint to send TON */
   const clientTon = new TonClient({ endpoint: TONCENTER_RPC, apiKey: TONCENTER_API_KEY })
 
   let walletInterface = {}
@@ -27,7 +28,8 @@ export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address
   const t = { value, to, body }
   const messages = [internal(t)]
   const seqno = await contract.getSeqno() || 0
-  const signedTransaction = await contract.createTransfer({ seqno, secretKey, messages })
+  const tx = { seqno, secretKey, messages }
+  const signedTransaction = await contract.createTransfer(tx)
 
   /* To ensure that the transaction is sent, we send it 5 times using Lite-Server */
   for (let i = 0; i < 5; i++) {
