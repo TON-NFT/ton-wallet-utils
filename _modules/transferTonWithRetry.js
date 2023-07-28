@@ -1,6 +1,7 @@
 import { TonClient, internal, WalletContractV4, WalletContractV3R1, WalletContractV3R2 } from 'ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
 import { startTonLiteServer } from './startTonLiteServer.js'
+import { TONCENTER_API_KEY, TONCENTER_RPC } from '../private/config.js'
 
 export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
   const client = await startTonLiteServer()
@@ -8,14 +9,13 @@ export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address
   const { publicKey, secretKey } = keyPair
 
   /* We are not actually using this endpoint */
-  const endpoint = 'https://toncenter.com/api/v2/jsonRPC'
-  const clientTon = new TonClient({ endpoint })
+  const clientTon = new TonClient({ endpoint: TONCENTER_RPC, apiKey: TONCENTER_API_KEY })
 
   let walletInterface = {}
-  if (version === 'v3R1') walletInterface = WalletContractV3R1
-  if (version === 'v3R2') walletInterface = WalletContractV3R2
-  if (version === 'v4R1') walletInterface = WalletContractV4
-  if (version === 'v4R2') walletInterface = WalletContractV4
+  if (version === VERSION_TYPES.v3R1) walletInterface = WalletContractV3R1
+  if (version === VERSION_TYPES.v3R2) walletInterface = WalletContractV3R2
+  if (version === VERSION_TYPES.v4R1) walletInterface = WalletContractV4
+  if (version === VERSION_TYPES.v4R2) walletInterface = WalletContractV4
   if (!walletInterface) throw new Error('Invalid wallet version')
 
   const workchain = 0
