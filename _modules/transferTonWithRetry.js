@@ -1,11 +1,13 @@
 import { TonClient, internal, WalletContractV4, WalletContractV3R1, WalletContractV3R2 } from 'ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
+import { startTonLiteServer } from './startTonLiteServer.js'
 
 export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
   const client = await startTonLiteServer()
   const keyPair = await mnemonicToPrivateKey(mnemonic)
   const { publicKey, secretKey } = keyPair
 
+  /* We are not actually using this endpoint */
   const endpoint = 'https://example.com'
   const clientTon = new TonClient({ endpoint })
 
