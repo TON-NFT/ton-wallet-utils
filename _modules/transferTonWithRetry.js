@@ -1,7 +1,7 @@
 import { TonClient, internal, WalletContractV4, WalletContractV3R1, WalletContractV3R2 } from 'ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
 import { startTonLiteServer } from './startTonLiteServer.js'
-import { TONCENTER_API_KEY, TONCENTER_RPC } from '../private/config.js'
+import { TONCENTER_API_KEY, TONCENTER_RPC, VERSION_TYPES } from '../private/config.js'
 
 export async function transferTonWithRetry({ mnemonic, version = 'v4R2', address: to, amount, payload: body = '' }) {
   const client = await startTonLiteServer()

@@ -14,7 +14,7 @@ Based on [@truecarry/ton-lite-client](https://www.npmjs.com/package/@truecarry/t
 - Create Highload Wallet
 - Create v4R2 Wallet
 - Get TON price
-- Send TON Transfer
+- Send TON Transfer *(both 'ton' and 'tonweb' implementations)*
 - Send Highload Transfers
 - Get NFT metadata by address
 - Transfer NFT
@@ -26,7 +26,7 @@ Based on [@truecarry/ton-lite-client](https://www.npmjs.com/package/@truecarry/t
 - Get all Jettons balances by address
 - Get Jettons balance by owner and jetton address
 - Get wallet balance by address
-- Get domain by NFT address
+- Get domain name by NFT address
 - Get transactions history by address
 - Refresh Getgems metadata by nft address
 - Get known name of address
