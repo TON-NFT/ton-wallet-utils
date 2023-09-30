@@ -4,7 +4,8 @@ import { tonMnemonic, tonweb } from '../private/tonweb.js'
 
 export async function createWallet({ version = 'v4R2' }) {
   if (version === VERSION_TYPES.highload) return await createHighloadWallet()
-  if (version === VERSION_TYPES.v4R2) return await createRegularWallet({ version })
+  const isRegularWallet = Object.values(VERSION_TYPES).includes(version)
+  if (isRegularWallet) return await createRegularWallet({ version })
   return { error: 'Unknown version' }
 }
 

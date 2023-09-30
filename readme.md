@@ -12,7 +12,7 @@ Using under the hood — [ton-lite-client](https://www.npmjs.com/package/ton-lit
 ## Features
 - Start TON Lite Server
 - Create Highload Wallet
-- Create v4R2 Wallet
+- Create v3R1 — v4R2 Wallet
 - Get TON price
 - Send TON Transfer *(both 'ton' and 'tonweb' implementations)*
 - Send Highload Transfers
