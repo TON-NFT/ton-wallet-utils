@@ -10,7 +10,7 @@ export function flipAddressType(address) {
 export function flipAddressBouncableType(address) {
   if (!address) return ''
   if (address.length !== 48) return ''
-  const isNonBouncable = addressType.startsWith('E')
+  const isNonBouncable = address.startsWith('E')
   const bouncableAddress = new TonWeb.utils.Address(address).toString(true, true, true)
   const nonBouncableAddress = new TonWeb.utils.Address(address).toString(true, true, false)
   return isNonBouncable ? bouncableAddress : nonBouncableAddress
