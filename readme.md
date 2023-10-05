@@ -30,7 +30,7 @@ Using under the hood — [ton-lite-client](https://www.npmjs.com/package/ton-lit
 - Get transactions history by address
 - Refresh Getgems metadata by nft address
 - Get known name of address
-- Flip address type, short address and other utils
+- Flip address type, bouncable type, short address and other utils
 - And More...
 
 ## Coming soon

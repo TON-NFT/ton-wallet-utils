@@ -1,6 +1,7 @@
 import {
   config,
   shortAddress,
+  flipAddressBouncableType,
   getBalance,
   getFloor,
   getDomain,
@@ -40,6 +41,7 @@ const tonPrice = await getTonPrice()
 const refresh = await refreshGetgemsMetadata({ address: 'EQDnMTsgio_GtNKZjD1Ow6N6sAfJY_DBk-ClC-WSsvvo7YCP' })
 const whois = await whoIsAddress('EQCtiv7PrMJImWiF2L5oJCgPnzp-VML2CAt5cbn1VsKAxLiE')
 const domainDate = await getDomainDate({ address: 'EQD6doIj7gRnw160Bc-fSKEs641wVFDHTROkOt__j4ykiU2o' })
+const flippedBouncable = flipAddressBouncableType(address)
 
 // const data = {
 //   version: 'v4R2',
@@ -54,5 +56,5 @@ const domainDate = await getDomainDate({ address: 'EQD6doIj7gRnw160Bc-fSKEs641wV
 // const result = await transferNft(data)
 // console.log(result)
 
-console.log({ refresh, whois, floor, jettons, nfts, nfts2, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice, domainDate })
+console.log({ refresh, whois, floor, jettons, nfts, nfts2, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice, domainDate, flippedBouncable })
 process.exit(0)
