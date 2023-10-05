@@ -19,7 +19,7 @@ import { loadHighloadWallet } from './_modules/loadHighloadWallet.js'
 import { startTonLiteServer } from './_modules/startTonLiteServer.js'
 import { transferTon } from './_modules/transferTon.js'
 import { transferTonWithRetry } from './_modules/transferTonWithRetry.js'
-import { shortAddress, flipAddressType } from './_modules/utils.js'
+import { shortAddress, flipAddressType, flipAddressBouncableType } from './_modules/utils.js'
 import { getNftContent } from './_modules/getNftContent.js'
 import { transferNft } from './_modules/transferNft.js'
 import { getNftsFromScaleton } from './_modules/getNftsFromScaleton.js'
@@ -38,6 +38,7 @@ export {
   createWallet,
   createHighloadWallet,
   flipAddressType,
+  flipAddressBouncableType,
   getBalance,
   getDomain,
   getDomainDate,
