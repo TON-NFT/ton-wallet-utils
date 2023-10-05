@@ -1,6 +1,6 @@
 {
   "name": "ton-wallet-utils",
-  "version": "2.69.0",
+  "version": "2.70.0",
   "description": "@tg09F9 package for TON, with some helpfull utils for wallet based on @TrueCarry liteserver",
   "type": "module",
   "scripts": {
