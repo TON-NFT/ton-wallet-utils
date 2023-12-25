@@ -5,7 +5,7 @@ import { KNOWN_COLLECTIONS, IPFS_GATEWAY, TON_API_KEY } from '../private/config.
 
 export async function getNfts({ address }) {
   const rawAddress = flipAddressType(address)
-  const url = `https://tonapi.io/v1/nft/getItemsByOwnerAddress?account=${rawAddress}`
+  const url = `https://tonapi.io/v2/nft/getItemsByOwnerAddress?account=${rawAddress}`
   try {
     const { statusText, data } = await axios.get(url, { headers: { 'Authorization': `Bearer ${TON_API_KEY}` } })
     if (statusText !== 'OK') return { error: true, nfts: [] }

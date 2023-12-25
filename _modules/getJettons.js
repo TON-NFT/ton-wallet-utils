@@ -6,7 +6,7 @@ export async function getJettons({ address }) {
   const rawAddress = flipAddressType(address)
 
   try {
-    const url = `https://tonapi.io/v1/jetton/getBalances?account=${rawAddress}`
+    const url = `https://tonapi.io/v2/jetton/getBalances?account=${rawAddress}`
     const { statusText, data } = await axios.get(url, { headers: { 'Authorization': `Bearer ${TON_API_KEY}` } })
     if (statusText === 'OK') {
       let jettons = []
@@ -15,7 +15,7 @@ export async function getJettons({ address }) {
         for (const tokenBalance of data.balances) {
           tokenBalance.balance = +tokenBalance.balance
 
-          const url = `https://tonapi.io/v1/jetton/getInfo?account=${tokenBalance.jetton_address}`
+          const url = `https://tonapi.io/v2/jetton/getInfo?account=${tokenBalance.jetton_address}`
 
           const { statusText, data } = await axios.get(url, { headers: { 'Authorization': `Bearer ${TON_API_KEY}` } })
 

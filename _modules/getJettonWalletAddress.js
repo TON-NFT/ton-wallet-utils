@@ -16,7 +16,7 @@ export async function getJettonWalletAddress({ jettonAddress, walletAddress, mne
   const rawAddress = toRawAddress(walletAddress)
   const rawJettonAddress = toRawAddress(jettonAddress)
 
-  const url = `https://tonapi.io/v1/jetton/getBalances?account=${rawAddress}`
+  const url = `https://tonapi.io/v2/jetton/getBalances?account=${rawAddress}`
   const { statusText, data } = await axios.get(url, { headers: { 'Authorization': `Bearer ${TON_API_KEY}` } })
 
   if (statusText === 'OK') {

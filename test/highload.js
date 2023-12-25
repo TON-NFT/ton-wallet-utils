@@ -1,7 +1,7 @@
-import { createWallet, highloadTransfers } from '../main.js'
+import { createHighloadWallet, highloadTransfers } from '../index.js'
 
 async function exampleWallet() {
-  const { address, seed } = await createWallet({ version: 'highload' })
+  const { address, seed } = await createHighloadWallet()
   console.log({ address, seed })
   process.exit(0)
 }
