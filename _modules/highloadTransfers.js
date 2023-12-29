@@ -29,7 +29,13 @@ export async function highloadTransfers({ transfers = [], seed, client }) {
     const message = wallet.createTransferMessage(transfers, true)
     const signed = message.sign(secretKey)
     const payload = Buffer.from(BOC.toBytesStandard(signed))
-    const result = await client.sendMessage(payload)
+    const repeatForSanity = 10
+    let result
+    for (let i = 0; i < repeatForSanity; i++) {
+      result = await client.sendMessage(payload)
+      if (result.result !== 1) console.log(result.result)
+      else break
+    }
     return result
   } catch (e) {
     console.log(`Error while sending TON from: ${address}, maybe balance is not enough or address doesn't match?`)
