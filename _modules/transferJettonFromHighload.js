@@ -16,8 +16,8 @@ import { startTonLiteServer } from './startTonLiteServer.js'
   ]
 */
 
-export async function transferJettonFromHighload({ transfers = [], seed }) {
-  const client = await startTonLiteServer()
+export async function transferJettonFromHighload({ transfers = [], seed, client }) {
+  if (!client) client = await startTonLiteServer()
   if (!seed) return console.error('Seed is required')
   if (!transfers?.length) return console.error('Transfers are required')
   if (transfers.length > 254) return console.error('Max 254 transfers per request')

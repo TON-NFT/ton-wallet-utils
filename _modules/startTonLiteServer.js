@@ -14,10 +14,18 @@ function intToIP(int) {
 
 let blockchainClient = null
 
-export async function startTonLiteServer() {
+export async function startTonLiteServer(customLiteServersList = []) {
   if (blockchainClient) return blockchainClient
-  const response = await axios.get(NODES_INFO)
-  const { liteservers } = response.data
+
+  let liteservers = []
+
+  if (customLiteServersList.length === 0) {
+    const response = await axios.get(NODES_INFO)
+    const { liteservers: publicLiteServersList } = response.data
+    liteservers = [...publicLiteServersList]
+  } else {
+    liteservers = [...customLiteServersList]
+  }
 
   const engines = []
 
