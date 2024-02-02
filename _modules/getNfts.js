@@ -1,18 +1,24 @@
-import axios from 'axios'
+import fetch, { Headers } from 'node-fetch'
 import { flipAddressType } from './utils.js'
 import { getDomain } from './getDomain.js'
 import { KNOWN_COLLECTIONS, IPFS_GATEWAY, TON_API_KEY } from '../private/config.js'
 
-export async function getNfts({ address }) {
+export async function getNfts({ address, ton_api_key = TON_API_KEY }) {
   const rawAddress = flipAddressType(address)
-  const url = `https://tonapi.io/v2/nft/getItemsByOwnerAddress?account=${rawAddress}`
+
+  const url = `https://tonapi.io/v2/accounts/${rawAddress}/nfts`
+  const options = { method: 'GET', headers: new Headers({ 'Authorization': `Bearer ${ton_api_key}` }) }
+
   try {
-    const { statusText, data } = await axios.get(url, { headers: { 'Authorization': `Bearer ${TON_API_KEY}` } })
-    if (statusText !== 'OK') return { error: true, nfts: [] }
-    const nfts = await mapNFTs(data.nft_items)
+    const response = await fetch(url, options)
+    const responseJSON = await response.json()
+  
+    const nfts = await mapNFTs(responseJSON.nft_items)
+
     for (const n of nfts.filter(nft => !nft.metadata)) {
       console.log(`No metadata at NFT ${n.address}`)
     }
+
     return { error: false, nfts }
   } catch(e) {
     console.log(e?.response?.statusText || e)
@@ -34,6 +40,7 @@ async function mapNFTs(nfts) {
         nft.collectionAddress = flipAddressType(nft.collection_address)
         delete nft.collection_address
       }
+
       nft.getgemsCollectionUrl = `https://getgems.io/collection/${nft.collectionAddress}`
       nft.getgemsNftUrl = `https://getgems.io/collection/${nft.collectionAddress}/${nft.address}`
     } else {

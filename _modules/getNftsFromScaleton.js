@@ -1,14 +1,15 @@
-import axios from 'axios'
+import fetch from 'node-fetch'
 import { getDomain } from './getDomain.js'
 import { KNOWN_COLLECTIONS } from '../private/config.js'
 
 /*  Get first 50 NFTs from Scaleton API */
 export async function getNftsFromScaleton({ address }) {
   const url = `https://api.scaleton.io/v1/accounts/${address}/nfts`
+
   try {
-    const { statusText, data } = await axios.get(url)
-    if (statusText !== 'OK') return { error: true, nfts: [] }
-    const nfts = await mapNFTs(data.items)
+    const response = await fetch(url, options)
+    const responseJSON = await response.json()
+    const nfts = await mapNFTs(responseJSON.items)
     return { error: false, nfts }
   } catch(e) {
     console.log(e?.response?.statusText || e)

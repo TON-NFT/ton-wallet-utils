@@ -15,7 +15,7 @@ export const VERSION_TYPES = {
 }
 
 export const TON_API_KEY = `AGDNDGKFQ5V6F4YAAAAF5E4MCKYUIB5J6G2NHDLCCD64Z36GLBSYEB35OQ7N76MSHTPG4YA`
-export const TON_API_URL = 'https://tonapi.io/v2/blockchain/'
+
 export const NNTN = 1000000000
 export const WALLET_LENGTH = 48
 

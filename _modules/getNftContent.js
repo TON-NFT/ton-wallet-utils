@@ -1,24 +1,33 @@
-import axios from 'axios'
+import fetch from 'node-fetch'
 
 export async function getNftContent({ address }) {
   try {
-    const response = await axios.get(`https://api.ton.cat/v2/contracts/nft/nft_item/${address}`)
-    const nftData = response?.data
+    const url = `https://api.ton.cat/v2/contracts/nft/nft_item/${address}`
+    const response = await fetch(url, options)
+    const responseJSON = await response.json()
+  
     const isNFT = nftData?.type === 'nft_item'
     if (!isNFT) return null
 
-    const nftMetadataUrl = nftData?.nft_item?.content_url
+    const nft_item = responseJSON.nft_item
+
+    const nftMetadataUrl = nft_item.content_url
 
     const data = {
-      index: nftData.nft_item.index,
-      itemAddress: nftData.nft_item.item_address,
-      collectionAddress: nftData.nft_item.collection_address,
-      uri: nftData.nft_item.content_url,
+      index: nft_item.index,
+      itemAddress: nft_item.item_address,
+      collectionAddress: nft_item.collection_address,
+      uri: nft_item.content_url,
     }
 
     if (nftMetadataUrl) {
-      const responseItem = await axios.get(nftMetadataUrl)
-      data.metadata = responseItem.data
+      try {
+        const response = await fetch(nftMetadataUrl, options)
+        const responseJSON = await response.json()
+        data.metadata = responseJSON
+      } catch (e) {
+        console.log(e)
+      }
     }
 
     return data

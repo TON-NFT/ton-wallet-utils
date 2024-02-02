@@ -24,6 +24,7 @@ import { getNftContent } from './_modules/getNftContent.js'
 import { transferNft } from './_modules/transferNft.js'
 import { getNftsFromScaleton } from './_modules/getNftsFromScaleton.js'
 import { getTonPrice } from './_modules/getTonPrice.js'
+import { getJettonWalletAddress } from './_modules/getJettonWalletAddress.js'
 import { transferJetton } from './_modules/transferJetton.js'
 import { transferJettonFromHighload } from './_modules/transferJettonFromHighload.js'
 import { getJettonBalance } from './_modules/getJettonBalance.js'
@@ -60,6 +61,7 @@ export {
   getNftContent,
   transferNft,
   getTonPrice,
+  getJettonWalletAddress,
   transferJetton,
   transferJettonFromHighload,
   getJettonBalance,

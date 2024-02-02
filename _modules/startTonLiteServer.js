@@ -1,8 +1,8 @@
+import fetch from 'node-fetch'
 import { LiteSingleEngine } from 'ton-lite-client/dist/engines/single.js'
 import { LiteRoundRobinEngine } from 'ton-lite-client/dist/engines/roundRobin.js'
 import { LiteClient } from 'ton-lite-client/dist/client.js'
 import { NODES_INFO } from '../private/config.js'
-import axios from 'axios'
 
 function intToIP(int) {
   const part1 = int & 255
@@ -20,8 +20,9 @@ export async function startTonLiteServer(customLiteServersList = []) {
   let liteservers = []
 
   if (customLiteServersList.length === 0) {
-    const response = await axios.get(NODES_INFO)
-    const { liteservers: publicLiteServersList } = response.data
+    const response = await fetch(NODES_INFO)
+    const responseJSON = await response.json()
+    const { liteservers: publicLiteServersList } = responseJSON
     liteservers = [...publicLiteServersList]
   } else {
     liteservers = [...customLiteServersList]

@@ -1,13 +1,15 @@
-import axios from 'axios'
+import fetch from 'node-fetch'
 import { IPFS_GATEWAY } from '../private/config.js'
 
 export async function getCollection({ address }) {
   try {
-    const response = await axios.get(`https://api.ton.cat/v2/contracts/nft_collection/${address}`)
-    const data = response?.data
-    const isNFT = data?.type === 'nft_collection'
+    const url = `https://api.ton.cat/v2/contracts/nft_collection/${address}`
+    const response = await fetch(url, options)
+    const responseJSON = await response.json()
+
+    const isNFT = responseJSON?.type === 'nft_collection'
     if (!isNFT) return null
-    const collectionData = data.nft_collection
+    const collectionData = responseJSON.nft_collection
 
     const replaceIpfs = (obj) => {
       for (const key in obj) {
