@@ -20,7 +20,7 @@ export async function highloadTransfers({ transfers = [], seed, client }) {
 
   const seedBuffer = Buffer.from(seed, 'hex')
   const { publicKey, secretKey } = keyPairFromSeed(seedBuffer)
-  const wallet = new Wallets.ContractHighloadWalletV2(0, publicKey, 1)
+  const wallet = new Wallets.ContractHighloadWalletV2({ publicKey, workchain: 0, subwalletId: 1 })
   const address = wallet.address.toString('base64', { bounceable: true, urlSafe: true, workchain: 0 })
 
   transfers = transfers.map(mapTransfer)
