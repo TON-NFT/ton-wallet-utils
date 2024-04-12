@@ -14,7 +14,7 @@ Using under the hood — [ton-lite-client](https://www.npmjs.com/package/ton-lit
 - Create Highload Wallet
 - Create v3R1 — v4R2 Wallet
 - Get TON price
-- Send TON Transfer *(both 'ton' and 'tonweb' implementations)*
+- Send TON Transfer *(both '@ton/ton' and 'tonweb' implementations)*
 - Send Highload Transfers
 - Get NFT metadata by address
 - Transfer NFT

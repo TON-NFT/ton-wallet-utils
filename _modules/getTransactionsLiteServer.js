@@ -1,4 +1,4 @@
-import { Address } from 'ton'
+import { Address } from '@ton/ton'
 import { startTonLiteServer } from './startTonLiteServer.js'
 
 export async function getTransactionsLiteServer({ address }) {

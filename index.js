@@ -22,7 +22,6 @@ import { transferTonWithRetry } from './_modules/transferTonWithRetry.js'
 import { shortAddress, flipAddressType, flipAddressBouncableType, toRawAddress, toFriendlyAddress } from './_modules/utils.js'
 import { getNftContent } from './_modules/getNftContent.js'
 import { transferNft } from './_modules/transferNft.js'
-import { getNftsFromScaleton } from './_modules/getNftsFromScaleton.js'
 import { getTonPrice } from './_modules/getTonPrice.js'
 import { getJettonWalletAddress } from './_modules/getJettonWalletAddress.js'
 import { transferJetton } from './_modules/transferJetton.js'
@@ -46,7 +45,6 @@ export {
   getFloor,
   getJettons,
   getNfts,
-  getNftsFromScaleton,
   getTransaction,
   getTransactions,
   getTransactionsLiteServer,

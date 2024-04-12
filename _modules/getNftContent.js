@@ -3,10 +3,11 @@ import fetch from 'node-fetch'
 export async function getNftContent({ address }) {
   try {
     const url = `https://api.ton.cat/v2/contracts/nft/nft_item/${address}`
+    const options = { method: 'GET' }
     const response = await fetch(url, options)
     const responseJSON = await response.json()
   
-    const isNFT = nftData?.type === 'nft_item'
+    const isNFT = responseJSON?.type === 'nft_item'
     if (!isNFT) return null
 
     const nft_item = responseJSON.nft_item

@@ -1,4 +1,4 @@
-import { Address, Cell, TonClient, WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from 'ton'
+import { Address, Cell, TonClient, WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from '@ton/ton'
 import { mnemonicToPrivateKey } from 'ton-crypto'
 import TonWeb from 'tonweb'
 import { loadHighloadWallet } from './loadHighloadWallet.js'

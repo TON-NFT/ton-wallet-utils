@@ -1,4 +1,4 @@
-import { Address } from 'ton'
+import { Address } from '@ton/ton'
 
 export function getNonBouncable(toAddress) {
   try {

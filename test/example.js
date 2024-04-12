@@ -13,7 +13,6 @@ import {
   startTonLiteServer,
   transferNft,
   getDomainDate,
-  getNftsFromScaleton,
   getTonPrice,
   refreshGetgemsMetadata,
   whoIsAddress
@@ -32,7 +31,6 @@ const floor = await getFloor({ address: KNOWN_COLLECTIONS.whales })
 const domain = await getDomain({ address: 'EQC2iEJwOsEOptMwwiH57UBJW0B2LmXiBZP5bS_4i-lN6Js6' })
 const jettons = await getJettons({ address })
 const nfts = await getNfts({ address })
-const nfts2 = await getNftsFromScaleton({ address })
 const nftData = await getNftContent({ address: 'EQDnMTsgio_GtNKZjD1Ow6N6sAfJY_DBk-ClC-WSsvvo7YCP' })
 const regularWallet = await createWallet({ type: 'v4R2' })
 const highloadWallet = await createWallet({ type: 'highload' })
@@ -56,5 +54,5 @@ const flippedBouncable = flipAddressBouncableType(address)
 // const result = await transferNft(data)
 // console.log(result)
 
-console.log({ refresh, whois, floor, jettons, nfts, nfts2, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice, domainDate, flippedBouncable })
+console.log({ refresh, whois, floor, jettons, nfts, domain, balance, shortAddressExample, nftData, regularWallet, highloadWallet, transactions, tonPrice, domainDate, flippedBouncable })
 process.exit(0)

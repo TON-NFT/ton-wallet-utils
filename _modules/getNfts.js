@@ -27,6 +27,7 @@ export async function getNfts({ address, ton_api_key = TON_API_KEY }) {
 }
 
 async function mapNFTs(nfts) {
+  if (!nfts) return []
   return await Promise.all(nfts.map(async(nft) => {
     const isSingleNFT = !nft.collection_address
 

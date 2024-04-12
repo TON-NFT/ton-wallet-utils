@@ -1,5 +1,5 @@
 import { startTonLiteServer } from './startTonLiteServer.js'
-import { Address, Cell, parseTuple } from 'ton'
+import { Address, Cell, parseTuple } from '@ton/ton'
 
 export async function getDomain({ address }) {
   const client = await startTonLiteServer()
