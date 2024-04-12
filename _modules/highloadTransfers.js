@@ -46,7 +46,7 @@ export async function highloadTransfers({ transfers = [], seed, client }) {
 export function mapTransfer({ recipient, sendMessage, tonAmount }) {
   const body = sendMessage ? new Builder().storeUint(0, 32).storeString(sendMessage).cell() : new Cell()
   const mode = 3
-  const amount = new Coins(tonAmount, 0)
+  const amount = new Coins(tonAmount, { decimals: 9 })
   const destination = new Address(recipient)
   return { destination, amount, mode, body }
 }

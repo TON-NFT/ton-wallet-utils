@@ -67,7 +67,7 @@ export async function mapTransfer({ responseAddress, toAddress, jettonWalletAddr
   const tonAmount = 0.05
   const mode = 3
   const recipient = jettonWalletAddress
-  const amount = new Coins(tonAmount, 0)
+  const amount = new Coins(tonAmount, { decimals: 9 })
   const destination = new Address(recipient)
   let comment = new Builder()
   const commentParts = chunkSubstr(forwardPayload, 127)
@@ -79,18 +79,18 @@ export async function mapTransfer({ responseAddress, toAddress, jettonWalletAddr
 
   comment = comment.cell()
 
-  const body = new Builder().
-    storeUint(0xf8a7ea5, 32).
-    storeUint(0, 64).
-    storeCoins(new Coins(jettonAmount, 0)).
-    storeAddress(new Address(toAddress)).
-    storeAddress(new Address(responseAddress)).
-    storeUint(0, 1).
-    storeCoins(new Coins(0.01, 0)).
-    storeUint(0, 1).
-    storeUint(0, 32).
-    storeRef(comment).
-    cell()
+  const body = new Builder()
+    .storeUint(0xf8a7ea5, 32)
+    .storeUint(0, 64)
+    .storeCoins(new Coins(jettonAmount, { decimals: 9 }))
+    .storeAddress(new Address(toAddress))
+    .storeAddress(new Address(responseAddress))
+    .storeUint(0, 1)
+    .storeCoins(new Coins(0.01, { decimals: 9 }))
+    .storeUint(0, 1)
+    .storeUint(0, 32)
+    .storeRef(comment)
+    .cell()
 
   return { destination, amount, mode, body }
 }
