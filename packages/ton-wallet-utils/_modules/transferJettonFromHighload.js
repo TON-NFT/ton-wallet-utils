@@ -39,7 +39,7 @@ export async function transferJettonFromHighload({
   try {
     const message = wallet.createTransferMessage(transactions, true);
     const signed = message.sign(secretKey);
-    const payload = Buffer.from(BOC.toBytesStandard(signed));
+    const payload = new BOC([signed]).toBytes();
     const result = await client.sendMessage(payload);
     return result;
   } catch (e) {
