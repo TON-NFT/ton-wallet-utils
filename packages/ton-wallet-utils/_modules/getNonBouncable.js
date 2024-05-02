@@ -1,11 +1,15 @@
-import { Address } from '@ton/ton'
+import { Address } from "@ton/ton";
 
 export function getNonBouncable(toAddress) {
   try {
-    toAddress = Address.parse(toAddress)
-    return toAddress.toString({ urlSafe: true, bounceable: false, testOnly: false })
+    toAddress = Address.parse(toAddress);
+    return toAddress.toString({
+      urlSafe: true,
+      bounceable: false,
+      testOnly: false,
+    });
   } catch (e) {
-    console.log(e)
-    return toAddress
+    console.log(e);
+    return toAddress;
   }
 }

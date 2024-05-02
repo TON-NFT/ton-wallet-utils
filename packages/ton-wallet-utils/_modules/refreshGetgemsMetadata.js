@@ -1,7 +1,7 @@
-import { gql, GraphQLClient } from 'graphql-request'
+import { gql, GraphQLClient } from "graphql-request";
 
 export async function refreshGetgemsMetadata({ address }) {
-  const graphQLClient = new GraphQLClient('https://api.getgems.io/graphql')
+  const graphQLClient = new GraphQLClient("https://api.getgems.io/graphql");
   const query = gql`
   mutation {
     nftRefreshMetadata(address: "${address}") {
@@ -9,12 +9,12 @@ export async function refreshGetgemsMetadata({ address }) {
       description,
     }
   }
-  `
+  `;
   try {
-    const result = await graphQLClient.request(query)
-    return result.nftRefreshMetadata
+    const result = await graphQLClient.request(query);
+    return result.nftRefreshMetadata;
   } catch (error) {
-    console.log(error)
-    return false
+    console.log(error);
+    return false;
   }
 }

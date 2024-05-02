@@ -6,7 +6,7 @@ import {
   TONCENTER_RPC,
   NODES_INFO,
   IPFS_GATEWAY,
-} from '../private/config.js'
+} from "../private/config.js";
 
 const config = {
   WHALES_POOLS,
@@ -16,6 +16,6 @@ const config = {
   TONCENTER_RPC,
   NODES_INFO,
   IPFS_GATEWAY,
-}
+};
 
-export default config
+export default config;

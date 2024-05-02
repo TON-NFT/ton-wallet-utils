@@ -1,6 +1,6 @@
-import { Address, BOC, Coins, Builder } from 'ton3-core'
-import { loadHighloadWallet } from './loadHighloadWallet.js'
-import { startTonLiteServer } from './startTonLiteServer.js'
+import { Address, BOC, Coins, Builder } from "ton3-core";
+import { loadHighloadWallet } from "./loadHighloadWallet.js";
+import { startTonLiteServer } from "./startTonLiteServer.js";
 
 /* Example of multiple transactions in one blockchain request */
 /*
@@ -16,68 +16,88 @@ import { startTonLiteServer } from './startTonLiteServer.js'
   ]
 */
 
-export async function transferJettonFromHighload({ transfers = [], seed, client }) {
-  if (!client) client = await startTonLiteServer()
-  if (!seed) return console.error('Seed is required')
-  if (!transfers?.length) return console.error('Transfers are required')
-  if (transfers.length > 254) return console.error('Max 254 transfers per request')
+export async function transferJettonFromHighload({
+  transfers = [],
+  seed,
+  client,
+}) {
+  if (!client) client = await startTonLiteServer();
+  if (!seed) return console.error("Seed is required");
+  if (!transfers?.length) return console.error("Transfers are required");
+  if (transfers.length > 254)
+    return console.error("Max 254 transfers per request");
 
-  const { wallet, address, secretKey } = await loadHighloadWallet({ seed })
+  const { wallet, address, secretKey } = await loadHighloadWallet({ seed });
 
-  const transactions = []
+  const transactions = [];
 
   for (const transfer of transfers) {
-    const tx = await mapTransfer(transfer)
-    transactions.push(tx)
+    const tx = await mapTransfer(transfer);
+    transactions.push(tx);
   }
 
   try {
-    const message = wallet.createTransferMessage(transactions, true)
-    const signed = message.sign(secretKey)
-    const payload = Buffer.from(BOC.toBytesStandard(signed))
-    const result = await client.sendMessage(payload)
-    return result
+    const message = wallet.createTransferMessage(transactions, true);
+    const signed = message.sign(secretKey);
+    const payload = Buffer.from(BOC.toBytesStandard(signed));
+    const result = await client.sendMessage(payload);
+    return result;
   } catch (e) {
-    console.log(`Error while sending TON from: ${address}, maybe balance is not enough or address doesn't match?`)
-    throw e
+    console.log(
+      `Error while sending TON from: ${address}, maybe balance is not enough or address doesn't match?`
+    );
+    throw e;
   }
 }
 
 function chunkSubstr(str, size) {
-  const numChunks = Math.ceil(str.length / size)
-  const chunks = new Array(numChunks)
+  const numChunks = Math.ceil(str.length / size);
+  const chunks = new Array(numChunks);
 
   for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
-    chunks[i] = str.substr(o, size)
+    chunks[i] = str.substr(o, size);
   }
 
-  return chunks
+  return chunks;
 }
 
 function writeComment(commentParts, i, maxSize) {
-  if (i == maxSize) return 0
-  let currentCell
-  const nextInnerCell = writeComment(commentParts, i + 1, maxSize)
-  if (nextInnerCell == 0) currentCell = new Builder().storeString(commentParts[i]).cell()
-  else currentCell = new Builder().storeString(commentParts[i]).storeRef(nextInnerCell).cell()
-  return currentCell
+  if (i == maxSize) return 0;
+  let currentCell;
+  const nextInnerCell = writeComment(commentParts, i + 1, maxSize);
+  if (nextInnerCell == 0)
+    currentCell = new Builder().storeString(commentParts[i]).cell();
+  else
+    currentCell = new Builder()
+      .storeString(commentParts[i])
+      .storeRef(nextInnerCell)
+      .cell();
+  return currentCell;
 }
 
-export async function mapTransfer({ responseAddress, toAddress, jettonWalletAddress, forwardPayload, jettonAmount }) {
-  const tonAmount = 0.05
-  const mode = 3
-  const recipient = jettonWalletAddress
-  const amount = new Coins(tonAmount, { decimals: 9 })
-  const destination = new Address(recipient)
-  let comment = new Builder()
-  const commentParts = chunkSubstr(forwardPayload, 127)
-  comment = comment.storeString(commentParts[0])
+export async function mapTransfer({
+  responseAddress,
+  toAddress,
+  jettonWalletAddress,
+  forwardPayload,
+  jettonAmount,
+}) {
+  const tonAmount = 0.05;
+  const mode = 3;
+  const recipient = jettonWalletAddress;
+  const amount = new Coins(tonAmount, { decimals: 9 });
+  const destination = new Address(recipient);
+  let comment = new Builder();
+  const commentParts = chunkSubstr(forwardPayload, 127);
+  comment = comment.storeString(commentParts[0]);
 
   if (commentParts.length > 1) {
-    comment = comment.storeRef(writeComment(commentParts, 1, commentParts.length))
+    comment = comment.storeRef(
+      writeComment(commentParts, 1, commentParts.length)
+    );
   }
 
-  comment = comment.cell()
+  comment = comment.cell();
 
   const body = new Builder()
     .storeUint(0xf8a7ea5, 32)
@@ -90,7 +110,7 @@ export async function mapTransfer({ responseAddress, toAddress, jettonWalletAddr
     .storeUint(0, 1)
     .storeUint(0, 32)
     .storeRef(comment)
-    .cell()
+    .cell();
 
-  return { destination, amount, mode, body }
+  return { destination, amount, mode, body };
 }

@@ -1,38 +1,46 @@
-import TonWeb from 'tonweb'
+import TonWeb from "tonweb";
 
 export function flipAddressType(address) {
-  if (!address) return ''
-  return address.includes(':')
-    ? (new TonWeb.utils.Address(address)).toString(true, true, true)
-    : (new TonWeb.utils.Address(address)).toString(false, false, true)
+  if (!address) return "";
+  return address.includes(":")
+    ? new TonWeb.utils.Address(address).toString(true, true, true)
+    : new TonWeb.utils.Address(address).toString(false, false, true);
 }
 
 export function flipAddressBouncableType(address) {
-  if (!address) return ''
-  if (address.length !== 48) return ''
-  const isBouncable = address.startsWith('E')
-  const bouncableAddress = new TonWeb.utils.Address(address).toString(true, true, true)
-  const nonBouncableAddress = new TonWeb.utils.Address(address).toString(true, true, false)
-  return isBouncable ? nonBouncableAddress : bouncableAddress
+  if (!address) return "";
+  if (address.length !== 48) return "";
+  const isBouncable = address.startsWith("E");
+  const bouncableAddress = new TonWeb.utils.Address(address).toString(
+    true,
+    true,
+    true
+  );
+  const nonBouncableAddress = new TonWeb.utils.Address(address).toString(
+    true,
+    true,
+    false
+  );
+  return isBouncable ? nonBouncableAddress : bouncableAddress;
 }
 
 export function toRawAddress(address) {
-  if (!address) return ''
-  return address.includes(':')
+  if (!address) return "";
+  return address.includes(":")
     ? address
-    : (new TonWeb.utils.Address(address)).toString(false, false, true)
+    : new TonWeb.utils.Address(address).toString(false, false, true);
 }
 
 export function toFriendlyAddress(address) {
-  if (!address) return ''
-  return address.includes(':')
-    ? (new TonWeb.utils.Address(address)).toString(true, true, true)
-    : address
+  if (!address) return "";
+  return address.includes(":")
+    ? new TonWeb.utils.Address(address).toString(true, true, true)
+    : address;
 }
 
 export function shortAddress(address, length = 4) {
-  if (!address) return ''
-  return `${address.substring(0, length)}...${address.substring(address.length-length)}`
+  if (!address) return "";
+  return `${address.substring(0, length)}...${address.substring(address.length - length)}`;
 }
 
-export const NNTN = 1e9
+export const NNTN = 1e9;
