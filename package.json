@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "ton-wallet-utils",
   "private": true,
   "scripts": {
     "build": "turbo build",
