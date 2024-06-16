@@ -28,7 +28,7 @@ export async function highloadTransfers({ transfers = [], seed, client }) {
   try {
     const message = wallet.createTransferMessage(transfers, true)
     const signed = message.sign(secretKey)
-    const payload = Buffer.from(BOC.toBytesStandard(signed))
+    const payload = Buffer.from(new BOC([signed]).toBytes())
     const repeatForSanity = 10
     let result
     for (let i = 0; i < repeatForSanity; i++) {
